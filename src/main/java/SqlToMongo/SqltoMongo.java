@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 public class SqltoMongo {
 	
-	public ArrayList<String> readPostgre(){
-		String usr ="postgres";
-		String pwd ="1234";
-		String url ="jdbc:postgresql://localhost:5432/mydb";
+	public ArrayList<String> readPostgre(String db,String usr,String pwd){
+//		String usr ="postgres";
+//		String pwd ="1234";
+		String url ="jdbc:postgresql://localhost:5432/"+db;
 		 ArrayList<String> values = new ArrayList<String>();
 		try
 		{
@@ -29,15 +29,15 @@ public class SqltoMongo {
             System.out.println("Success connecting server!");
 
             Statement statementObject = dateabaseConnection.createStatement();
-            ResultSet rs = statementObject.executeQuery("SELECT * FROM Sales");
+            ResultSet rs = statementObject.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema='public'");
            
             while(rs.next()){
-            	values.add(rs.getString("cust"));
-            	values.add(rs.getString("prod"));
-            	values.add(rs.getString("day"));
-            	values.add(rs.getString("month"));
-            	values.add(rs.getString("year"));
-            	values.add(rs.getString("quant"));
+            	values.add(rs.getString("table_name"));
+//            	values.add(rs.getString("prod"));
+//            	values.add(rs.getString("day"));
+//            	values.add(rs.getString("month"));
+//            	values.add(rs.getString("year"));
+//            	values.add(rs.getString("quant"));
             }
            
 		}
@@ -45,6 +45,14 @@ public class SqltoMongo {
 			System.out.println(e);
 		}
 		 return values;
+	}
+	
+	
+	/*Push tables as collection to MongoDB */
+	
+	public ArrayList<String> pushInMongo(){
+		return null;
+		
 	}
 
 }

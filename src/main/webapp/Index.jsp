@@ -10,8 +10,18 @@
 </head>
 <body>
 <h1> Welcome to Citizens Bank</h1>
-<%SqltoMongo sql = new SqltoMongo(); %>
-<% ArrayList<String> list = sql.readPostgre(); %>
-<%=list %>
+<h2>Give the following information for connecting a relational db</h2>
+<form action="Main.jsp" method="post">
+ <label>Enter your Database Name: </label>
+<input name="dbname" type="text"></input><br>
+<label>Enter your user name of Database</label>
+<input name="usrname" type="text"></input><br>
+<label>Enter your Password of Database</label>
+<input name="passwd" type="password"></input><br>
+<input type="submit" value="submit"></input>
+<%session.setAttribute("dbName",request.getParameter("dbname"));%>
+<%session.setAttribute("usrName",request.getParameter("usrname"));
+session.setAttribute("passWord",request.getParameter("passwd"));%>
+</form>
 </body>
 </html>
