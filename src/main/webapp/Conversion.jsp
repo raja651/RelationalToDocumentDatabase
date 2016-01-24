@@ -10,8 +10,11 @@
 </head>
 <body>
 <h1> The Selected table <%=request.getParameter("tables") %> has been Pushed to MongoDB</h1>
-<%=session.getAttribute("dbname") %>
+<%String dbName= request.getParameter("dbName");%>
+<% String usrName= request.getParameter("usrName");%>
+<% String passWord= request.getParameter("passWord");%>
+<%String tableName = request.getParameter("tables");%>
 <%SqltoMongo sql = new SqltoMongo();%>
-<%sql.pushInMongo();%>
+<%sql.pushInMongo(dbName,usrName,passWord,tableName);%>
 </body>
 </html>
